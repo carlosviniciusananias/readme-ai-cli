@@ -1,3 +1,5 @@
+import { ollamaPrompt } from "./prompt/index.js";
+
 export async function generateReadme(projectContent: string) {
     const response = await fetch("http://127.0.0.1:11434/api/generate", {
         method: "POST",
@@ -6,7 +8,7 @@ export async function generateReadme(projectContent: string) {
         },
         body: JSON.stringify({
             model: "llama3:8b",
-            prompt: `You are a senior software engineer. Generate a professional README.md for the project below: ${projectContent}`,
+            prompt: ollamaPrompt(projectContent),
             stream: false,
         }),
     });
